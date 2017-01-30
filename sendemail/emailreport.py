@@ -1,4 +1,4 @@
-from bandit import Bandit
+from bandit import Bandit, job
 import pandas as pd
 import numpy as np
 import time
@@ -14,28 +14,21 @@ result = sm.ols(formula="A ~ B + C", data=df).fit()
 
 metadata = {'R2': result.rsquared, 'AIC': result.aic}
 
-bandit = Bandit('colin', 'c4548110-cc4b-11e6-a5c5-0242ac110003','http://54.201.192.120/')
+bandit = Bandit()
 bandit.metadata.R2 = result.rsquared
 bandit.metadata.AIC = result.aic
 bandit.metadata['value1'] = 2
-
-for x in range(10):
-    for y in range(10):
-        bandit.report('a', x, y)
-
-for x in range(10):
-    for y in range(10):
-        for tag in ["a", "b", "c", "d", "e", "f", "g"]:
-            bandit.report(tag, y, np.random.rand())
-        time.sleep(0.1)
 
 print(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
 print(metadata)
 
 df.to_csv('/job/output-files/dataframe.csv')
 
-# bandit.email.body("HI")
-# print(bandit.email)
-
+body = 'This is an email body'
+email = job.Email(["colin@yhathq.com"])
+email.subject("HI")
+email.body(body)
 # email.body(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-# email.attachment('/job/output-files/dataframe.csv')
+print(email)
+# there are no attachments
+# bandit.email.attachment('/job/output-files/dataframe.csv')
