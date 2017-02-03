@@ -35,10 +35,10 @@ bandit.metadata.R2 = result.rsquared
 bandit.metadata.AIC = result.aic
 
 chart = sns.distplot(df.A)
-chart.figure.savefig(output_dir + 'dist.png')
+chart.figure.savefig(bandit.output_dir + 'dist.png')
 
 # save
-df.head().to_csv(output_dir + 'datasample.csv')
+df.head().to_csv(bandit.output_dir + 'datasample.csv')
 
 today = datetime.date.today().strftime('%Y_%m_%d')
 
@@ -54,7 +54,7 @@ Model Stats: %s
 ''' % result.model.formula, result.rsquared_adj
 
 email.body = body
-email.add_attachment(output_dir + 'datasample.csv')
-email.add_attachment(output_dir + 'model_stats.txt')
-email.add_attachment(output_dir + 'dist.png')
+email.add_attachment(bandit.output_diroutput_dir + 'datasample.csv')
+email.add_attachment(bandit.output_diroutput_dir + 'model_stats.txt')
+email.add_attachment(bandit.output_diroutput_dir + 'dist.png')
 email.send('colin@yhathq.com')
