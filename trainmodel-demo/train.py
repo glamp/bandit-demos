@@ -54,7 +54,7 @@ Model Stats: %s
 ''' % result.model.formula, result.rsquared_adj
 
 email.body = body
-email.add_attachment(bandit.output_diroutput_dir + 'datasample.csv')
-email.add_attachment(bandit.output_diroutput_dir + 'model_stats.txt')
-email.add_attachment(bandit.output_diroutput_dir + 'dist.png')
+email.add_attachment(bandit.output_dir + 'datasample.csv')
+email.add_attachment(bandit.output_dir + 'model_stats.txt')
+email.add_attachment(bandit.output_dir + 'dist.png')
 email.send('colin@yhathq.com')
